@@ -121,7 +121,7 @@ resource "aws_route" "public" {
 }
 
 # EIP
-resource "aws_eip" "nap" {
+resource "aws_eip" "nat" {
   domain   = "vpc"
    tags = merge(
     var.eip_tags,
@@ -134,7 +134,7 @@ resource "aws_eip" "nap" {
 
 # Nategate way
 resource "aws_nat_gateway" "nat" {
-  allocation_id = aws_eip.nap.id
+  allocation_id = aws_eip.nat.id
   subnet_id     = aws_subnet.public[0].id
 
   tags = merge(
